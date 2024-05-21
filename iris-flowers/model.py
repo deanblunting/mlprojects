@@ -22,7 +22,7 @@ x = array[:, 0:4]
 y = array[:, 4]
 x_train, x_validation, y_train, y_validation = train_test_split(x, y, test_size=0.20, random_state=1)
 
-# spot check alogorithms
+# spot check algorithms
 models = []
 models.append(('LR', LogisticRegression(solver='liblinear', multi_class='ovr')))
 models.append(('LDA', LinearDiscriminantAnalysis()))
@@ -40,3 +40,8 @@ for name, model in models:
     results.append(cv_results)
     names.append(name)
     print('%s: %f (%f)' % (name, cv_results.mean(), cv_results.std()))
+
+# compare algorithms
+plt.boxplot(results, labels=names)
+plt.title('Algorithm Comparison')
+plt.show()
