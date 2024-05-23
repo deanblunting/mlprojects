@@ -16,17 +16,17 @@ url = "iris.csv"
 names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
 dataset = read_csv(url, names=names)
 
-# split-out validation dataset
+# split-out test dataset
 array = dataset.values
 x = array[:, 0:4]
 y = array[:, 4]
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=1)
-
-
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.20, random_state=1)
 
 # spot check algorithms
 models = []
-models.append(('LR', LogisticRegression(solver='liblinear', multi_class='ovr')))
+models.append(('LR', LogisticRegression(
+    solver='liblinear', multi_class='ovr')))
 models.append(('LDA', LinearDiscriminantAnalysis()))
 models.append(('KNN', KNeighborsClassifier()))
 models.append(('CART', DecisionTreeClassifier()))
@@ -38,14 +38,13 @@ results = []
 names = []
 for name, model in models:
     kfold = StratifiedKFold(n_splits=10, random_state=1, shuffle=True)
-    cv_results = cross_val_score(model, x_train, y_train, cv=kfold, scoring='accuracy')
+    cv_results = cross_val_score(
+        model, x_train, y_train, cv=kfold, scoring='accuracy')
     results.append(cv_results)
     names.append(name)
     print('%s: %f (%f)' % (name, cv_results.mean(), cv_results.std()))
 
-'''
 # compare algorithms
 plt.boxplot(results, labels=names)
 plt.title('Algorithm Comparison')
 plt.show()
-'''
