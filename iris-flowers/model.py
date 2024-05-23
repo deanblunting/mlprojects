@@ -12,7 +12,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
 # load dataset
-url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv"
+url = "iris.csv"
 names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
 dataset = read_csv(url, names=names)
 
@@ -20,7 +20,9 @@ dataset = read_csv(url, names=names)
 array = dataset.values
 x = array[:, 0:4]
 y = array[:, 4]
-x_train, x_validation, y_train, y_validation = train_test_split(x, y, test_size=0.20, random_state=1)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=1)
+
+
 
 # spot check algorithms
 models = []
@@ -41,7 +43,9 @@ for name, model in models:
     names.append(name)
     print('%s: %f (%f)' % (name, cv_results.mean(), cv_results.std()))
 
+'''
 # compare algorithms
 plt.boxplot(results, labels=names)
 plt.title('Algorithm Comparison')
 plt.show()
+'''
