@@ -3,7 +3,7 @@ from pandas import read_csv
 from matplotlib import pyplot as plt
 
 # load dataset
-url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv"
+url = "iris.csv"
 names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
 dataset = read_csv(url, names=names)
 
